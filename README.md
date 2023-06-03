@@ -1,0 +1,22 @@
+ 'trust',
+  'untrust',
+  'ban',
+  'unban',
+  'bans',
+  'w',
+  'p',
+  'promote',
+  'demote',
+  'time',
+  'version',
+  'mute',
+  'unmute',
+  'kick',
+  reconnect
+  init
+  trustlist
+  gamespeed
+  locationF
+  stalk
+  egoboost
+  
