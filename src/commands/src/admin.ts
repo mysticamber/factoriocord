@@ -5,7 +5,6 @@ export default class Admin extends Command {
     super(rcon);
   }
   runCommand(interaction: any): void {
-    // interaction.reply("Test");
     try {
       const subcommand = interaction.options.data[0];
       switch (subcommand.name) {
