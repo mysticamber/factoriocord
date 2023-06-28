@@ -1,6 +1,6 @@
 import Command from "../command.js";
 import log from "../../logger.js";
-import TRUSTLIST from "./trustlist.js";
+import TRUSTLIST from "../data/trustlist.js";
 
 export default class Admin extends Command {
   constructor(rcon: any) {

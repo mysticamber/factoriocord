@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
 import log from "./logger.js";
-import COMMANDS from "./commands/commands.js";
+import COMMANDS from "./commands/data/commands.js";
 import EMBED_COLOR from "./constants/color.js";
 function axiosInit() {
   log.info("Axios was setup");

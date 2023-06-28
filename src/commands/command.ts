@@ -7,6 +7,6 @@ export default abstract class Command {
   }
   abstract runCommand(interaction: any): void;
   handleDefault(interaction: any): void {
-    interaction.reply("Filo doesn't know that command yet");
+    interaction.reply("Birdie doesn't know that command yet");
   }
 }

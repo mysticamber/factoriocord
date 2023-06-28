@@ -51,14 +51,14 @@ export default class Admin extends Command {
   async handlePlayerAction(subcommand: any, interaction: any) {
     const action = subcommand.name;
     const param = this.getParam("name", subcommand);
-    const rconResponse = this.rcon.send(`/${action} ${param}`);
+    const player = param.split("")[0];
+    this.rcon.send(`/${action} ${player}`);
     const msg = `${interaction.member.user.username} ${this.MESSAGES.get(
       action
-    )} ${param}`;
+    )} ${player}`;
 
     await interaction.reply({
       content: msg,
     });
   }
-
 }
