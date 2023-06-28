@@ -30,10 +30,10 @@ if (process.env.REREGISTER_COMMANDS === "true") {
 const tailProcess: any = spawnTailProcess(); // log tail
 log.info("Discord: API Client Loaded");
 
-let rconn: any;
+let rcon: any;
 // Rcon
 if (process.env.RCON_ENABLED === "true") {
-  rconn = new ReadyRcon();
+  rcon = new ReadyRcon();
   log.info("Factorio: Rcon Loaded");
 } else {
   log.info("Rcon feature disabled in .env");
@@ -48,7 +48,7 @@ if (process.env.RCON_ENABLED === "true") {
 }
 
 // Two Way Client
-const discordGatewayClient = new GatewayClient(rconn);
+const discordGatewayClient = new GatewayClient(rcon);
 
 // Exit cleanups
 process.on("exit", () => {
@@ -87,23 +87,25 @@ process.stdin.on("data", (input) => {
       process.env.DISCORD_CHANNEL_ID_ADMIN_COMMANDS,
       formatEmbedMessages("Attempting to Reconnect to RCON", "BLUE", true)
     );
-    // rconn = connectToRcon();
-  } else if (data === "COMMANDS") {
-    registerCommands();
+    if (rcon) {
+      rcon.disconnect();
+      rcon = new ReadyRcon();
+    } else {
+      rcon = new ReadyRcon();
+    }
   }
 });
 
 function handleExit() {
   try {
-    if (rconn) {
-      // log.info("RCON: Disconnecting");
-      // rconn.disconnect();
+    if (rcon) {
+      log.info("RCON: Disconnecting");
+      rcon.disconnect();
     }
     if (discordGatewayClient) {
       log.info("DISCORD: disconnecting");
       discordGatewayClient.destroy();
     }
-
     log.info("TAIL: disconnecting");
     tailProcess.kill();
   } catch (error) {

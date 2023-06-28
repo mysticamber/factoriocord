@@ -1,5 +1,7 @@
 import Command from "../command.js";
 import log from "../../logger.js";
+import TRUSTLIST from "./trustlist.js";
+
 export default class Admin extends Command {
   constructor(rcon: any) {
     super(rcon);
@@ -24,6 +26,13 @@ export default class Admin extends Command {
         case "gamespeed": {
           this.handleGameSpeed(subcommand, interaction);
           break;
+        }
+        case "trustlist": {
+          this.handleTrustList(interaction);
+          break;
+        }
+        case "reconnect": {
+          this.handleReconnect(interaction);
         }
         default: {
           super.handleDefault(interaction);
@@ -73,6 +82,26 @@ export default class Admin extends Command {
     );
     await interaction.reply({
       content: `${interaction.member.user.username} initialized the server. Set time to ${dateTime}`,
+    });
+  }
+
+  async handleReconnect(interaction: any) {
+    this.rcon.reconnect();
+    await interaction.reply({
+      content: `${interaction.member.user.username} attempted to revive birdie`,
+    });
+  }
+
+  async handleTrustList(interaction: any) {
+    // TODO - update it to just writing to the variable directly rather than calling trust multiple times
+    let count = 0;
+    TRUSTLIST.forEach((playerName) => {
+      count++;
+      this.rcon.send(`/trust ${playerName}`);
+    });
+
+    await interaction.reply({
+      content: `${interaction.member.user.username} ran trust for player list count: ${count}`,
     });
   }
 }

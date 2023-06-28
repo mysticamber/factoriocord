@@ -3,7 +3,6 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import Admin from "./commands/src/admin.js";
 import log from "./logger.js";
 import Chat from "./commands/src/chat.js";
-import HealthCheck from "./commands/src/healthcheck.js";
 import Player from "./commands/src/player.js";
 import ServerInfo from "./commands/src/serverinfo.js";
 
@@ -37,9 +36,8 @@ export default class GatewayClient {
   instantiateCommands(rcon: any) {
     this.commands.set("admin", new Admin(rcon));
     this.commands.set("chat", new Chat(rcon));
-    this.commands.set("healthcheck", new HealthCheck(rcon));
     this.commands.set("player", new Player(rcon));
-    this.commands.set("serverinfo", new ServerInfo(rcon));
+    this.commands.set("server-info", new ServerInfo(rcon));
   }
 
   destroy() {

@@ -4,15 +4,15 @@ import log from "./logger.js";
 import { sendMessage, formatEmbedMessages } from "./discordApiClient.js";
 
 export default class ReadyRcon {
-  rconn: Rcon;
+  rcon: Rcon;
   constructor() {
     let retries = 0;
-    this.rconn = new Rcon(
+    this.rcon = new Rcon(
       process.env.FACTORIO_RCON_IP,
       process.env.FACTORIO_RCON_PORT,
       process.env.FACTORIO_RCON_PASSWORD
     );
-    this.rconn
+    this.rcon
       .on("auth", () => {
         retries = 0;
         log.info("Rcon Opened!");
@@ -62,13 +62,16 @@ export default class ReadyRcon {
           log.error(`Rcon error: ${e}`);
         } else {
           retries = retries + 1;
-          this.rconn.connect();
+          this.rcon.connect();
         }
       });
     log.info("Rcon is Starting");
-    this.rconn.connect();
+    this.rcon.connect();
   }
   send(data: any) {
-    return this.rconn.send(data);
+    return this.rcon.send(data);
+  }
+  disconnect() {
+    this.rcon.disconnect();
   }
 }
