@@ -1,6 +1,6 @@
 # Setup
 - Run npm install
-- `cp template/.env .env`
+- `cp .env.example .env`
 - Add/Replace .env values as required
 
 # TODO
