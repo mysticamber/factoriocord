@@ -13,12 +13,11 @@ log.methodFactory = (methodName, logLevel, loggerName) => {
   };
 };
 
-
 // Enable all log methods
 log.enableAll();
 
 // Set the default log level
 log.setDefaultLevel(log.levels.INFO);
-log.setLevel('info'); 
+log.setLevel('info');
 
 export default log;
