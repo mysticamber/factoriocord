@@ -1,6 +1,6 @@
 const SERVERINFO = {
   name: "serverinfo",
-  description: "Check server things",
+  description: "Check server status",
   options: [
     {
       name: "time",
@@ -9,7 +9,7 @@ const SERVERINFO = {
     },
     {
       name: "version",
-      description: "Check current game length",
+      description: "Check current game version",
       type: 1,
     },
     {
@@ -19,12 +19,12 @@ const SERVERINFO = {
       options: [
         {
           name: "count",
-          description: "Check current game length",
+          description: "Show player count",
           type: 1,
         },
         {
           name: "players",
-          description: "Check current game length",
+          description: "who's in game",
           type: 1,
         },
       ],
@@ -37,17 +37,17 @@ const ADMIN = {
   options: [
     {
       name: "init",
-      description: "Initialize",
+      description: "Initialize (time)",
       type: 1,
     },
     {
       name: "gamespeed",
-      description: "Promote Player",
+      description: "Change game speed: (1) is normal",
       type: 1,
       options: [
         {
           name: "speed",
-          description: "In Game Name",
+          description: "speed to set it to",
           type: 3,
           required: true,
         },

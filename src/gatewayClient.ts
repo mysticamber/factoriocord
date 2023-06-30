@@ -37,7 +37,7 @@ export default class GatewayClient {
     this.commands.set("admin", new Admin(rcon));
     this.commands.set("chat", new Chat(rcon));
     this.commands.set("player", new Player(rcon));
-    this.commands.set("server-info", new ServerInfo(rcon));
+    this.commands.set("serverinfo", new ServerInfo(rcon));
   }
 
   destroy() {
