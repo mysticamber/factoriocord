@@ -19,7 +19,10 @@ export default class Admin extends Command {
     try {
       const subcommand = interaction.options.data[0];
       switch (subcommand.name) {
-        case "ban":
+        case "ban": {
+          this.handleBan(subcommand, interaction);
+          break;
+        }
         case "unban":
         case "trust":
         case "untrust":
@@ -47,15 +50,26 @@ export default class Admin extends Command {
     );
     return param.value;
   }
+  async handleBan(subcommand: any, interaction: any) {
+    const action = subcommand.name;
+    const name = this.getParam("name", subcommand);
+    const reason = this.getParam("reason", subcommand);
+    this.rcon.send(`/${action} ${name} ${reason}`);
+    const msg = `${interaction.member.user.username} ${this.MESSAGES.get(
+      action
+    )} ${name}`;
 
+    await interaction.reply({
+      content: msg,
+    });
+  }
   async handlePlayerAction(subcommand: any, interaction: any) {
     const action = subcommand.name;
     const param = this.getParam("name", subcommand);
-    const player = param.split("")[0];
-    this.rcon.send(`/${action} ${player}`);
+    this.rcon.send(`/${action} ${param}`);
     const msg = `${interaction.member.user.username} ${this.MESSAGES.get(
       action
-    )} ${player}`;
+    )} ${param}`;
 
     await interaction.reply({
       content: msg,
